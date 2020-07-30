@@ -277,10 +277,9 @@ class PosenetActivity :
       for (cameraId in manager.cameraIdList) {
         val characteristics = manager.getCameraCharacteristics(cameraId)
 
-        // We don't use a front facing camera in this sample.
+        // Look for and use the front facing camera
         val cameraDirection = characteristics.get(CameraCharacteristics.LENS_FACING)
-        if (cameraDirection != null &&
-          cameraDirection == CameraCharacteristics.LENS_FACING_FRONT
+        if (cameraDirection != CameraCharacteristics.LENS_FACING_FRONT
         ) {
           continue
         }
@@ -435,7 +434,7 @@ class PosenetActivity :
 
       // Create rotated version for portrait display
       val rotateMatrix = Matrix()
-      rotateMatrix.postRotate(90.0f)
+      rotateMatrix.postRotate(-90.0f)
 
       val rotatedBitmap = Bitmap.createBitmap(
         imageBitmap, 0, 0, previewWidth, previewHeight,
